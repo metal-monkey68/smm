@@ -42,18 +42,31 @@ function execScript(tab) {
         })
 }
 function grabInput(order){
+    document.getElementsByName("dbc-consolidation-table-checkbox")[0].click();
+    //let checkboxArray = document.getElementsByName("ui-order-table-cell-row-checkbox")
+    for(let i = 0; i < document.getElementsByName("order-code-input").length; i++){
+        clickInput(i)
+    }
+
+function clickInput(index){
     let orderCodeInput = document.getElementsByName("order-code-input");
-    for(let i = 0; i < orderCodeInput.length; i++){
-        let orderRandomStr = '';
-        let characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-        let charactersLength = characters.length;
+
+    orderCodeInput[index].focus();
+    orderCodeInput[index].value = randomStr();
+    orderCodeInput[index].dispatchEvent(new Event('input', { bubbles: true }));
+    
+    }
+
+function randomStr(){
+    let orderRandomStr = '';
+    let characters = '0123456789';
+    let charactersLength = characters.length;
         for (let y = 0; y < 9; y++) {
             orderRandomStr += characters.charAt(Math.floor(Math.random() * charactersLength));
             }
-        orderCodeInput[i].focus()
-        orderCodeInput[i].value = orderRandomStr;
-        orderCodeInput[i].blur();
+    return orderRandomStr
     }
+
 }
 
 
